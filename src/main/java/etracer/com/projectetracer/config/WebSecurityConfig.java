@@ -92,6 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/email/**").permitAll() 
                 .antMatchers("/assets/**").permitAll() 
                 .antMatchers("/confirm-account/**").permitAll() 
+                .antMatchers("/forgot-password/**").permitAll() 
                 .antMatchers("/reset-password/**").permitAll() 
                 .antMatchers("/admin/**","/employee/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/manager/**").hasAnyAuthority("MANAGER")
