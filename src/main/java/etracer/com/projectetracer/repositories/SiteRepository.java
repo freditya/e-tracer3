@@ -5,6 +5,7 @@
  */
 package etracer.com.projectetracer.repositories;
 
+import etracer.com.projectetracer.entities.Employee;
 import etracer.com.projectetracer.entities.Score;
 import etracer.com.projectetracer.entities.Site;
 import java.util.List;
@@ -23,6 +24,10 @@ public interface SiteRepository extends CrudRepository<Site, String> {
             value = "SELECT * FROM site s WHERE s.isDelete='false'",
             nativeQuery = true)
     List<Site> getAll();
+     @Query(
+            value = "SELECT COUNT(site.siteId) as total FROM site",
+            nativeQuery = true)
+    List<Site> getCount();
 //    @Query(
 //            value = "SELECT s.siteId, s.siteName, s.villageId, s.employeeId, s.isDelete \n"
 //            + "FROM site s\n"

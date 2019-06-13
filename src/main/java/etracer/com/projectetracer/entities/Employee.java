@@ -53,7 +53,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Employee implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "employeeName")
     private String employeeName;
@@ -150,7 +150,7 @@ public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "employeeId")
     private String employeeId;

@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Job implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "jobName")
     private String jobName;

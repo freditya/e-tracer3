@@ -27,5 +27,11 @@ public interface EmployeeRepository extends CrudRepository<Employee, String> {
             + "WHERE e.isDelete =\'false\'",
             nativeQuery = true)
     List<Employee> getAll();
+
+//    @Query(
+//            value = "SELECT employeeId FROM employee",
+//            nativeQuery = true)
+//    List<Employee> getCount();
+
     Employee findByEmail(String email);
 }

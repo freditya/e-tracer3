@@ -259,6 +259,7 @@
                                                     <th>Assessment ID</th>
                                                     <th>Assessment Name</th>
                                                     <th>Employee</th>
+                                                    <th style="display:none;">Employee</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -266,7 +267,8 @@
                                                 <tr th:each = "data:${dataAssessment}">
                                                     <td id="assessment_id" th:text="${data.assessmentId}"></td>
                                                     <td id="assessment_name" th:text="${data.assessmentName}"></td>
-                                                    <td id="employee_id" th:text="${data.employeeId.employeeName}"></td>
+                                                    <td id="employee_id" th:text="${data.employeeId.employeeId}" style="display:none;"></td>
+                                                    <td th:text="${data.employeeId.employeeName}"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#edit-assessment"><i class="fa fa-edit"></i>
                                                             Edit</button>
@@ -310,13 +312,7 @@
                     </div>
                     <form th:action="@{/assessment/addData}" method="post">
                         <input type="hidden" class="form-control" id="isDelete" name="isDelete" value="false">
-
-                        <div class="form-group required">
-                            <label for="assessmentId" class="col-form-label col-md-4">Assessment ID</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="assessmentId" name="assessmentId" placeholder="Identity">
-                            </div>
-                        </div>
+                        <input type="hidden" class="form-control" id="assessmentId" name="assessmentId" value="0" placeholder="Identity">
                         <div class="form-group required">
                             <label for="assessmentName" class="col-form-label col-md-4">Assessment Name</label>
                             <div class="col-md-10">
@@ -341,7 +337,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!--Modal edit Dialog--> 
         <div class="modal fade" id="edit-assessment" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -353,12 +349,9 @@
                     <form th:action="@{/assessment/update}" method="get">
                         <input type="hidden" class="form-control" id="isDelete" name="isDelete" value="false">
 
-                        <div class="form-group required">
-                            <label for="assessmentId" class="col-form-label col-md-4">Assessment ID</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="assessment_id" name="assessmentId" placeholder="Identity">
-                            </div>
-                        </div>
+
+                        <input type="text" class="form-control" id="assessment_id" name="assessmentId" placeholder="Identity">
+
                         <div class="form-group required">
                             <label for="assessmentName" class="col-form-label col-md-4">Assessment Name</label>
                             <div class="col-md-10">

@@ -6,7 +6,6 @@
 package etracer.com.projectetracer.controllers;
 
 import etracer.com.projectetracer.entities.Assessment;
-import etracer.com.projectetracer.entities.Employee;
 import etracer.com.projectetracer.repositories.AssessmentRepository;
 import etracer.com.projectetracer.repositories.EmployeeRepository;
 import javax.validation.Valid;

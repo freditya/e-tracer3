@@ -36,7 +36,7 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "categoryId")
     private String categoryId;
