@@ -5,6 +5,7 @@
  */
 package etracer.com.projectetracer.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import etracer.com.projectetracer.entities.UserRole;
 import java.io.Serializable;
 import java.util.Date;
@@ -66,6 +67,7 @@ public class Employee implements Serializable {
     @Column(name = "dateOfBirth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
+//    @JsonFormat (pattern="dd-MM-yyyy")
     private Date dateOfBirth;
     @Basic(optional = false)
     @NotNull

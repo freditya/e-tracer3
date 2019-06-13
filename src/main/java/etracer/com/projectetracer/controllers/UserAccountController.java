@@ -76,9 +76,7 @@ public class UserAccountController {
             mailMessage.setFrom("upnormal.bootcamp@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
                     + "http://localhost:8083/confirm-account?token=" + token.getToken());
-
             emailSenderService.sendEmail(mailMessage);
-
             modelAndView.addObject("email", employee.getEmail());
             modelAndView.setViewName("success");
         }
@@ -103,24 +101,30 @@ public class UserAccountController {
         }
         return modelAndView;
     }
-    
+
 //      Endpoint to update a user's password
     @RequestMapping(value = "/reset-password", method = RequestMethod.POST)
-    public ModelAndView resetUserPassword(ModelAndView modelAndView, Employee employee, String password) {
-        if (employee.getEmail() != null) {
-            // Use email to find user
-            Employee token = employeeRepository.findByEmail(employee.getEmail());
-            token.setPassword(bCryptPasswordEncoder.encode(password));
-            employeeRepository.save(token);
-            modelAndView.addObject("message", "Password successfully reset. You can now log in with the new credentials.");
-            modelAndView.setViewName("suksesReset");
+    public ModelAndView resetUserPassword(ModelAndView modelAndView, Employee employee, String password, String rytapepassword) {
+        if (password.equals(rytapepassword)) {
+            if (employee.getEmail() != null) {
+                // Use email to find user
+                Employee token = employeeRepository.findByEmail(employee.getEmail());
+                token.setPassword(bCryptPasswordEncoder.encode(password));
+                employeeRepository.save(token);
+                modelAndView.addObject("message", "Password successfully reset. You can now log in with the new credentials.");
+                modelAndView.setViewName("suksesReset");
+            } else {
+                modelAndView.addObject("message", "The link is invalid or broken!");
+                modelAndView.setViewName("error");
+            }
         } else {
-            modelAndView.addObject("message", "The link is invalid or broken!");
-            modelAndView.setViewName("error");
+            modelAndView.addObject("message", "password is note same");
+            modelAndView.setViewName("verrified");
         }
+
         return modelAndView;
     }
-    
+
     // Display the form
     @RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
     public ModelAndView displayResetPassword(ModelAndView modelAndView, Employee employee) {
@@ -143,8 +147,8 @@ public class UserAccountController {
             // Create the email
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(existingUser.getEmail());
-            mailMessage.setSubject("Complete Password Reset!");
-            mailMessage.setFrom("falapubi@gmail.com");
+            mailMessage.setSubject("Complete Forgot Password!");
+            mailMessage.setFrom("upnormal.bootcamp@gmail.com");
             mailMessage.setText("To complete the password reset process, please click here: "
                     + "http://localhost:8083/confirm-reset?token=" + confirmationToken.getToken());
 
@@ -195,10 +199,11 @@ public class UserAccountController {
     public void setTokenRepository(TokenRepository confirmationTokenRepository) {
         this.confirmationTokenRepository = confirmationTokenRepository;
     }
+
     public EmailSenderService getEmailSenderService() {
         return emailSenderService;
     }
-    
+
     public void setEmailSenderService(EmailSenderService emailSenderService) {
         this.emailSenderService = emailSenderService;
     }
